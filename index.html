@@ -272,14 +272,11 @@
       letter-spacing: -0.025em;
       line-height: 0.83;
       mix-blend-mode: normal;
-    }
-    .hero-name .line-inner {
       background: linear-gradient(180deg, #f7f7f7 0%, #888888 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       padding-bottom: 0.25em;
-      margin-bottom: -0.25em;
     }
 
     .hero-positioning {
@@ -1365,23 +1362,27 @@
     reveal(el, { y: 18, opacity: 0, duration: 0.55, ease: 'power2.out' });
   });
 
-  /* section headings + hero name — per-line mask reveal */
+  /* section headings + hero name — letters fade in */
   gsap.utils.toArray('.hero-name, .section-heading').forEach(el => {
-    /* split on <br> tags or treat as single line */
-    const rawHTML = el.innerHTML;
-    const parts = rawHTML.split(/<br\s*\/?>/i);
-    el.innerHTML = parts.map(p =>
-      `<span class="line-wrap" style="display:block"><span class="line-inner" style="display:block">${p}</span></span>`
-    ).join('');
+    const raw = el.innerHTML;
+    const lines = raw.split(/<br\s*\/?>/i);
+    el.innerHTML = lines.map(line => {
+      const tokens = line.match(/&[a-z#][^;]*;|[^]/gi) || [];
+      const spans = tokens.map(t =>
+        /^\s+$/.test(t)
+          ? `<span style="display:inline-block;white-space:pre">${t}</span>`
+          : `<span class="char" style="display:inline-block">${t}</span>`
+      ).join('');
+      return `<span style="display:block">${spans}</span>`;
+    }).join('');
 
-    const inners = el.querySelectorAll('.line-inner');
-    gsap.fromTo(inners,
-      { clipPath: 'inset(-5% 100% -20% 0%)' },
+    gsap.fromTo(el.querySelectorAll('.char'),
+      { opacity: 0 },
       {
-        clipPath: 'inset(-5% 0% -20% 0%)',
-        duration: 1.0,
-        ease: 'expo.out',
-        stagger: 0.12,
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out',
+        stagger: 0.028,
         scrollTrigger: { trigger: el, start: 'top 90%', once: true }
       }
     );
