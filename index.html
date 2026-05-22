@@ -1369,17 +1369,17 @@
     const rawHTML = el.innerHTML;
     const parts = rawHTML.split(/<br\s*\/?>/i);
     el.innerHTML = parts.map(p =>
-      `<span class="line-wrap" style="display:block;clip-path:inset(0 0 -0.4em 0)"><span class="line-inner" style="display:block">${p}</span></span>`
+      `<span class="line-wrap" style="display:block"><span class="line-inner" style="display:block">${p}</span></span>`
     ).join('');
 
     const inners = el.querySelectorAll('.line-inner');
     gsap.fromTo(inners,
-      { yPercent: 105 },
+      { clipPath: 'inset(-5% 100% -20% 0%)' },
       {
-        yPercent: 0,
-        duration: 0.9,
+        clipPath: 'inset(-5% 0% -20% 0%)',
+        duration: 1.0,
         ease: 'expo.out',
-        stagger: 0.08,
+        stagger: 0.12,
         scrollTrigger: { trigger: el, start: 'top 90%', once: true }
       }
     );
