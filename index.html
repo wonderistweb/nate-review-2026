@@ -159,10 +159,10 @@
       font-size: clamp(36px, 6vw, 64px);
       font-weight: 700;
       letter-spacing: -0.025em;
-      line-height: 0.95;
+      line-height: 0.9;
       color: var(--fg);
       margin-bottom: 56px;
-      padding-bottom: 0.08em;
+      padding-bottom: 0;
     }
     .tier-badge {
       font-family: var(--font-mono);
@@ -278,7 +278,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      padding-bottom: 0.18em;
     }
 
     .hero-positioning {
@@ -1370,7 +1369,7 @@
     const rawHTML = el.innerHTML;
     const parts = rawHTML.split(/<br\s*\/?>/i);
     el.innerHTML = parts.map(p =>
-      `<span class="line-wrap" style="display:block;overflow:hidden;padding-bottom:0.12em"><span class="line-inner" style="display:block">${p}</span></span>`
+      `<span class="line-wrap" style="display:block;overflow:hidden;padding-bottom:0.22em;margin-bottom:-0.22em"><span class="line-inner" style="display:block">${p}</span></span>`
     ).join('');
 
     const inners = el.querySelectorAll('.line-inner');
