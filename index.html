@@ -1496,18 +1496,6 @@
   else { window.addEventListener('load', startMarquee); }
 })();
 
-/* skip white header area in DEO mockup */
-(function() {
-  function initDeoScroll() {
-    const el = document.querySelector('.deo-image-scroll');
-    const img = el && el.querySelector('.deo-site-img');
-    if (!el || !img) return;
-    function scroll() { el.scrollTop = img.naturalHeight > 0 ? Math.round(img.offsetWidth * 0.065) : 80; }
-    if (img.complete) { scroll(); } else { img.addEventListener('load', scroll); }
-  }
-  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initDeoScroll); }
-  else { initDeoScroll(); }
-})();
 </script>
 
 </body>
