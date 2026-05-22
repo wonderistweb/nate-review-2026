@@ -271,12 +271,14 @@
       font-weight: 700;
       letter-spacing: -0.025em;
       line-height: 0.83;
-      padding-bottom: 0.18em;
+      mix-blend-mode: normal;
+    }
+    .hero-name .line-inner {
       background: linear-gradient(180deg, #f7f7f7 0%, #888888 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      mix-blend-mode: normal;
+      padding-bottom: 0.18em;
     }
 
     .hero-positioning {
@@ -1362,14 +1364,23 @@
     reveal(el, { y: 18, opacity: 0, duration: 0.55, ease: 'power2.out' });
   });
 
-  /* section headings + hero name — clip-path mask reveal */
+  /* section headings + hero name — per-line mask reveal */
   gsap.utils.toArray('.hero-name, .section-heading').forEach(el => {
-    gsap.fromTo(el,
-      { clipPath: 'inset(-2% 100% -15% -2%)' },
+    /* split on <br> tags or treat as single line */
+    const rawHTML = el.innerHTML;
+    const parts = rawHTML.split(/<br\s*\/?>/i);
+    el.innerHTML = parts.map(p =>
+      `<span class="line-wrap" style="display:block;overflow:hidden;padding-bottom:0.12em"><span class="line-inner" style="display:block">${p}</span></span>`
+    ).join('');
+
+    const inners = el.querySelectorAll('.line-inner');
+    gsap.fromTo(inners,
+      { yPercent: 105 },
       {
-        clipPath: 'inset(-2% 0% -15% -2%)',
-        duration: 1.15,
+        yPercent: 0,
+        duration: 0.9,
         ease: 'expo.out',
+        stagger: 0.08,
         scrollTrigger: { trigger: el, start: 'top 90%', once: true }
       }
     );
