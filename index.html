@@ -1369,7 +1369,7 @@
     const rawHTML = el.innerHTML;
     const parts = rawHTML.split(/<br\s*\/?>/i);
     el.innerHTML = parts.map(p =>
-      `<span class="line-wrap" style="display:block;overflow:hidden;padding-bottom:0.22em;margin-bottom:-0.22em"><span class="line-inner" style="display:block">${p}</span></span>`
+      `<span class="line-wrap" style="display:block;overflow:hidden;padding-bottom:0.4em;margin-bottom:-0.4em"><span class="line-inner" style="display:block">${p}</span></span>`
     ).join('');
 
     const inners = el.querySelectorAll('.line-inner');
