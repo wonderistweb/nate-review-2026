@@ -1412,7 +1412,7 @@
   });
 
   /* scale pullquote */
-  reveal('.scale-pullquote', { x: -28, opacity: 0, duration: 0.65, ease: 'power2.out' });
+  reveal('.scale-pullquote', { y: 20, opacity: 0, duration: 0.65, ease: 'power2.out' });
 
   /* DEO case study */
   reveal('#deoCaseStudy', { y: 56, opacity: 0, duration: 0.9, ease: 'power3.out' });
@@ -1436,12 +1436,12 @@
   });
 
   /* pull quote */
-  reveal('#pullQuote', { x: -32, opacity: 0, duration: 0.7, ease: 'power2.out' });
+  reveal('#pullQuote', { y: 20, opacity: 0, duration: 0.7, ease: 'power2.out' });
 
   /* proof rows */
   gsap.from('#proofList .proof-row', {
     scrollTrigger: { trigger: '#proofList', start: 'top 84%', once: true },
-    x: -18, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out'
+    y: 18, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out'
   });
 
   /* ahead items */
